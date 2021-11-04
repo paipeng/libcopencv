@@ -12,6 +12,8 @@ public class COpenCVAPI {
     public static Logger logger = LoggerFactory.getLogger(COpenCVAPI.class);
     private static final String LIB_NAME = "copencv";
 
+
+    //private static final String LIB_PATH = "./libs";
     private static COpenCVAPI INSTANCE;
 
     public static COpenCVAPI getInstance() {
@@ -24,7 +26,7 @@ public class COpenCVAPI {
 
     private static void setupNativeLibrary() {
         logger.trace("setupNativeLibrary");
-        NativeLibrary.addSearchPath(LIB_NAME, "./libs");
+        NativeLibrary.addSearchPath(LIB_NAME, LIB_PATH);
     }
 
     static {
@@ -57,6 +59,11 @@ public class COpenCVAPI {
 
     public int[] detectSquare(BufferedImage bufferedImage) {
         int[] square = new int[4];
+        square[0] = 0;
+        square[1] = 0;
+        square[2] = 0;
+        square[3] = 0;
+
         byte[] data = ImageUtil.convertBufferedImageToBytes(bufferedImage);
         int ret = OpenCVLib.INSTANCE.detect_square(data, bufferedImage.getWidth(), bufferedImage.getHeight(), 3, square);
 

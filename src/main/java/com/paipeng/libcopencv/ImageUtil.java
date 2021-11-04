@@ -97,4 +97,13 @@ public class ImageUtil {
         BufferedImage bi = bufferedImage.getSubimage(cropX, cropY, cropWidth, cropHeight);
         return bi;
     }
+
+
+    public static BufferedImage drawRect(BufferedImage bufferedImage, int x, int y, int width, int height) {
+        Graphics2D graph = bufferedImage.createGraphics();
+        graph.setColor(Color.BLACK);
+        graph.drawRect(x, y, width, height);
+        graph.dispose();
+        return bufferedImage;
+    }
 }

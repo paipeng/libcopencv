@@ -45,8 +45,10 @@ class COpenCVAPITest {
 
         System.out.println(String.format("detected square: %d-%d  %d-%d", square[0], square[1], square[2], square[3]));
 
-        BufferedImage cropBufferedImage = ImageUtil.cropImage(bufferedImage, square[0], square[1], square[2], square[3]);
-        boolean ret = ImageUtil.saveBufferedImage(cropBufferedImage, "/Users/paipeng/Downloads/squre_image.bmp");
-        Assertions.assertTrue(ret);
+        BufferedImage cropBufferedImage = ImageUtil.drawRect(bufferedImage, square[0], square[1], square[2], square[3]);
+        if (square[2] > 0 && square[3] > 0) {
+            boolean ret = ImageUtil.saveBufferedImage(cropBufferedImage, "/Users/paipeng/square_rect_image.bmp");
+            Assertions.assertTrue(ret);
+        }
     }
 }
