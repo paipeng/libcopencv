@@ -37,6 +37,8 @@ public class COpenCVAPI {
 
         int add(int a, int b);
         int invert_image(byte[] data, int width, int height, int image_format);
+
+        int detect_square(byte[] data, int width, int height, int image_format, int[] square);
     }
 
     public int add(int a, int b) {
@@ -51,5 +53,17 @@ public class COpenCVAPI {
         logger.trace("invert_image ret: " + ret);
 
         return ImageUtil.convert(data, bufferedImage.getWidth(), bufferedImage.getHeight());
+    }
+
+    public int[] detectSquare(BufferedImage bufferedImage) {
+        int[] square = new int[4];
+        byte[] data = ImageUtil.convertBufferedImageToBytes(bufferedImage);
+        int ret = OpenCVLib.INSTANCE.detect_square(data, bufferedImage.getWidth(), bufferedImage.getHeight(), 3, square);
+
+        if (ret == 0) {
+            return square;
+        } else {
+            return null;
+        }
     }
 }

@@ -35,4 +35,18 @@ class COpenCVAPITest {
         boolean ret = ImageUtil.saveBufferedImage(bufferedImage, "/Users/paipeng/Downloads/invert_image.bmp");
         Assertions.assertTrue(ret);
     }
+
+    @Test
+    void detectSquare() throws IOException {
+        String fileName = "/Users/paipeng/Documents/2021_Slavi_2DBarcode_Authorization/capture/m_0193.bmp";
+        BufferedImage bufferedImage = ImageUtil.readBufferedImage(fileName);
+        int[] square = COpenCVAPI.getInstance().detectSquare(bufferedImage);
+        Assertions.assertNotNull(square);
+
+        System.out.println(String.format("detected square: %d-%d  %d-%d", square[0], square[1], square[2], square[3]));
+
+        BufferedImage cropBufferedImage = ImageUtil.cropImage(bufferedImage, square[0], square[1], square[2], square[3]);
+        boolean ret = ImageUtil.saveBufferedImage(cropBufferedImage, "/Users/paipeng/Downloads/squre_image.bmp");
+        Assertions.assertTrue(ret);
+    }
 }

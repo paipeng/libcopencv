@@ -1,12 +1,17 @@
 package com.paipeng.libcopencv;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReadParam;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.Raster;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Iterator;
 
 public class ImageUtil {
 
@@ -85,5 +90,11 @@ public class ImageUtil {
 
     public static boolean saveBufferedImage(BufferedImage bufferedImage, String fileName) throws IOException {
         return ImageIO.write(bufferedImage, "bmp", new File(fileName));
+    }
+
+
+    public static BufferedImage cropImage(BufferedImage bufferedImage, int cropX, int cropY, int cropWidth, int cropHeight) {
+        BufferedImage bi = bufferedImage.getSubimage(cropX, cropY, cropWidth, cropHeight);
+        return bi;
     }
 }
